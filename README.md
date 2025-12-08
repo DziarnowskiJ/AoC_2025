@@ -341,7 +341,7 @@ Example input:
 5,5,5
 
 Possible connections:
-ID │ Point 1 (Name )      │ Point 2 (Name)       │ Distance (Rounded)
+ID │ Point 1 (Name)       │ Point 2 (Name)       │ Distance (Rounded)
 ───┼──────────────────────┼──────────────────────┼────────────────────
 1  │ Point 1 5 2      (A) │ Point 2 7 3      (B) │ 2.4
 2  │ Point 2 7 3      (B) │ Point 5 5 5      (F) │ 4.1
