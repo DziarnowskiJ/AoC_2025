@@ -368,7 +368,7 @@ A-F         │ {A,B,F}
 C-D         │ {A,B,F}, {C,D}      <── Part 1: Largest circuit after 4 connections has 3 points  
 D-E         │ {A,B,F}, {C,D,E}
 C-E         │ {A,B,F}, {C,D,E}
-C-F         │ {A,B,C,D,E,F}       <── Part 2 solution
+C-F         │ {A,B,C,D,E,F}       <── Part 2: All points connected after 7 connections
 ...         │ ...
 
 ```
