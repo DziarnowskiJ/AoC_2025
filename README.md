@@ -9,6 +9,7 @@ This is my repository for the annual [**Advent of Code**](https://adventofcode.c
 - [Day 6: Trash Compactor](#day-6)
 - [Day 7: Laboratories](#day-7)
 - [Day 8: Playground](#day-8)
+- [Day 9: Movie Theater](#day-9)
 
 # Notes on each day's challenge
 
@@ -371,4 +372,47 @@ C-E         │ {A,B,F}, {C,D,E}
 C-F         │ {A,B,C,D,E,F}       <── Part 2: All points connected after 7 connections
 ...         │ ...
 
+```
+
+## [Day 9: Movie Theater](https://adventofcode.com/2025/day/9)<span id="day-9"><span>
+Finding the largest possible rectangle area defined by two points in a grid
+
+The puzzle involves a large 2D grid of tiles. 
+The input provides the coordinates of several red tiles (**■**). 
+The goal of the first part is to select any two red tiles and use them 
+as opposite corners of a rectangle, then find the one with the maximum area.
+
+The second part introduced new green tiles (**□**) and a color constraint.
+The red tiles in the input list form a closed loop and are connected between each other with straight lines. 
+Those connections are made out of the green tiles. Additionally, all tiles inside this loop are also green.
+Similarly as before, the challenge required finding the largest area bounded by 2 red tiles, 
+with the exception that all tiles within it had to be green or red
+```
+Part 1 - Largest area
+
+Initial grid   │ Largest area
+───────────────┼────────────────
+.............. │ ..............
+.......■...■.. │ ..#########■..
+.............. │ ..##########..
+..■....■...... │ ..■####■####..
+.............. │ ..##########..
+..■......■.... │ ..■######■##..
+.............. │ ..............
+.........■.■.. │ .........■.■..
+.............. │ ..............
+
+Part 2 - Largest area of only green and red tiles
+
+Initial grid   │ Largest area
+───────────────┼────────────────
+.............. │ ..............
+.......■□□□■.. │ .......■□□□■..
+.......□□□□□.. │ .......□□□□□..
+..■□□□□■□□□□.. │ ..■#######□□..
+..□□□□□□□□□□.. │ ..########□□..
+..■□□□□□□■□□.. │ ..■######■□□..
+.........□□□.. │ .........□□□..
+.........■□■.. │ .........■□■..
+.............. │ ..............
 ```

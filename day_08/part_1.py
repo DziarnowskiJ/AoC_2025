@@ -21,7 +21,7 @@ def process(lines, conns_count):
               for x, y, z in [line.split(',')]]
 
     # All possible combinations, sorted based on distance
-    conns = [(straight_distance(p[0], p[1]), p[0], p[1]) for p in list(combinations(points, 2))]
+    conns = [(straight_distance(p[0], p[1]), p[0], p[1]) for p in combinations(points, 2)]
     conns.sort(key=lambda x: x[0])
 
     # Dict to store point groups

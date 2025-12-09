@@ -88,6 +88,10 @@ class Point:
         """Straight-line distance from the origin"""
         return math.sqrt(self.x**2 + self.y**2)
 
+    def get_area(self) -> float:
+        """Calculate are between point and origin"""
+        return abs(self.x * self.y)
+
 
 class Origin(Point):
     """Origin in 2D space"""
@@ -139,8 +143,10 @@ def get_one_step_direction(point1: Point, point2: Point) -> Direction | None:
 
 
 def point_neighbours(point: Point, diagonal: bool = True) -> list[Point]:
-    """List of Points surrounding given point.
-    Possible to include diagonal points"""
+    """
+    List of Points surrounding given point.
+    Possible to include diagonal points
+    """
     return [point + one_step(Direction(i)) for i in Direction if diagonal or i % 2 == 0]
 
 
