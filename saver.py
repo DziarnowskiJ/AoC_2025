@@ -123,27 +123,27 @@ def create_python(day):
 
     python_file = f"""import platform, sys, os
 
-    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-    base_path = '..' if platform.python_implementation() == 'CPython' else '.'
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+base_path = '..' if platform.python_implementation() == 'CPython' else '.'
 
-    with open(base_path + '/inputs/real/input_day_{day}.txt', 'r') as file:
-        input_lines = [i.rstrip("\\n") for i in file.readlines()]
+with open(base_path + '/inputs/real/input_day_{day}.txt', 'r') as file:
+    input_lines = [i.rstrip("\\n") for i in file.readlines()]
 
-    with open(base_path + '/inputs/sample/sample_input_day_{day}.txt', 'r') as file:
-        sample_lines = [i.rstrip("\\n") for i in file.readlines()]
-
-
+with open(base_path + '/inputs/sample/sample_input_day_{day}.txt', 'r') as file:
+    sample_lines = [i.rstrip("\\n") for i in file.readlines()]
 
 
-    def process(lines):
-        return lines
 
-    print("Sample output:", process(sample_lines))
-    print("Answer:", process(input_lines))
 
-    # pypy ./{save_path}
+def process(lines):
+    return lines
 
-    """
+print("Sample output:", process(sample_lines))
+print("Answer:", process(input_lines))
+
+# pypy ./{save_path}
+
+"""
 
     if not os.path.exists(f"day_{day:02d}"):
         os.makedirs(f"day_{day:02d}")
