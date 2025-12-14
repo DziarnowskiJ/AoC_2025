@@ -583,10 +583,11 @@ Specification:
 12x5: 1 0 1 0 2 2
 12x5: 1 0 1 0 3 2
 
-
+Example:
 4x4: 0 0 0 0 2 0
-Meaning:
-2 shapes from position 4 need to fit in 4x4 space 
+
+2 shapes from position 4 need to fit in 4x4 space.
+Possible way of fitting them: 
 ┌────┐
 │###.│
 │#□□□│
