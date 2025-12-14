@@ -10,6 +10,9 @@ This is my repository for the annual [**Advent of Code**](https://adventofcode.c
 - [Day 7: Laboratories](#day-7)
 - [Day 8: Playground](#day-8)
 - [Day 9: Movie Theater](#day-9)
+- [Day 10: Factory](#day-10)
+- [Day 11: Reactor](#day-11)
+- [Day 12: Christmas Tree Farm](#day-12)
 
 # Notes on each day's challenge
 
@@ -415,4 +418,184 @@ Initial grid   │ Largest area
 .........□□□.. │ .........□□□..
 .........■□■.. │ .........■□■..
 .............. │ ..............
+```
+
+## [Day 10: Factory](https://adventofcode.com/2025/day/10)<span id="day-10"><span>
+Solving systems of linear equations
+
+The challenge involves configuring a series of factory machines, 
+each defined by:
+- **_indicator light_** diagram - written inside square brackets
+- **_set of button wiring_** schematics - each button configuration written within round brackets
+- **_joltage_** requirements - denoted by curly brackets
+
+The core of the problem is to determine the minimum number of button presses 
+needed to achieve a target state (either the light configuration (part 1) or the joltage levels (part 2)). 
+Since the effect of button presses is linear and cumulative, this can be modeled as a system of linear equations.
+
+For part one the indicator lights are initially off, 
+and the goal is to match a target configuration. 
+Pushing a button toggles the state of its associated lights from either off to on or on to off.
+
+The second part ignores the lights and focuses on meeting the joltage requirements,
+where counters are initially 0. Pushing a button increases its associated 
+counters by 1.
+
+
+```
+Example input:
+[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}
+[...#.] (0,2,3,4) (2,3) (0,4) (0,1,2) (1,2,3,4) {7,5,12,7,2}
+[.###.#] (0,1,2,3,4) (0,3,4) (0,1,2,4,5) (1,2) {10,11,11,5,10,5}
+
+Part 1 - light configuration:
+
+Target │ Buttons
+───────┼─────────────────────────────────
+[.##.] │ (3) (1,3) (2) (2,3) (0,2) (0,1)
+
+Option │ Button pressed │ Resulting lights
+───────┼────────────────┼──────────────────
+1      │ (0,1)          │ ##..
+       │ (1,3)          │ #..#
+       │ (2,3)          │ #.#.
+       │ (0,1)          │ .##.
+───────┼────────────────┼──────────────────
+2      │ (0,2)          │ #.#.
+       │ (0,1)          │ .##.
+                        ├───────────────────────────
+                        │ Minimum button presses: 2       
+
+Part 2 - joltage configuration:
+
+Target    │ Buttons
+──────────┼─────────────────────────────────
+{3,5,4,7} │ (3) (1,3) (2) (2,3) (0,2) (0,1)
+
+
+Button pressed │ Press count │ Resulting joltage
+───────────────┼─────────────┼──────────────────
+(3)            │ 1           │ {0,0,0,1}
+(1,3)          │ 3           │ {0,3,0,4}
+(2,3)          │ 3           │ {0,3,3,7}
+(0,2)          │ 1           │ {1,3,4,7}
+(0,1)          │ 2           │ {3,5,4,7}
+               ├──────────────────
+               │ Total presses: 10       
+```
+
+## [Day 11: Reactor](https://adventofcode.com/2025/day/11)<span id="day-11"><span>
+Graph traversal and counting paths
+
+The puzzle models the factory's reactor and server rack connections as a 
+**directed graph**, where each device is a **node** and the output connections are **directed edges**.
+The task is to count the number of distinct paths between two specific nodes.
+
+Part one required finding number of paths from node `you` to node `out`.
+The challenge for second part was to find number of paths between `svr` and `out` but 
+each of those paths had to pass through `dac` and `fft` nodes in any order
+
+```mermaid
+graph LR;
+    p1[Part 1]
+    style p1 stroke:#fff, fill:#999;
+    
+    style you fill:#00f;
+    style out fill:#00f;
+    aaa((aaa))-->you[you]
+    aaa((aaa))-->hhh((hhh))
+    you[you]-->bbb((bbb))
+    you[you]-->ccc((ccc))
+    bbb((bbb))-->ddd((ddd))
+    bbb((bbb))-->eee((eee))
+    ccc((ccc))-->ddd((ddd))
+    ccc((ccc))-->eee((eee))
+    ccc((ccc))-->fff((fff))
+    ddd((ddd))-->ggg((ggg))
+    eee((eee))-->out[out]
+    fff((fff))-->out[out]
+    ggg((ggg))-->out[out]
+    hhh((hhh))-->ccc((ccc))
+    hhh((hhh))-->fff((fff))
+    hhh((hhh))-->iii((iii))
+    iii((iii))-->out[out]
+
+    r1[Paths Count: 5]
+```
+
+```mermaid
+graph LR;
+p2[Part 2]
+style svr fill:#00f;
+style out fill:#00f;
+style fft fill:#00f;
+style dac fill:#00f;
+style p2 stroke:#fff, fill:#999;
+
+r2[Paths count: 2]
+
+svr[svr]-->aaa((aaa))
+svr[svr]-->bbb((bbb))
+aaa((aaa))-->fft((fft))
+fft((fft))-->ccc((ccc))
+bbb((bbb))-->tty((tty))
+tty((tty))-->ccc((ccc))
+ccc((ccc))-->ddd((ddd))
+ccc((ccc))-->eee((eee))
+ddd((ddd))-->hub((hub))
+hub((hub))-->fff((fff))
+eee((eee))-->dac((dac))
+dac((dac))-->fff((fff))
+fff((fff))-->ggg((ggg))
+fff((fff))-->hhh((hhh))
+ggg((ggg))-->out[out]
+hhh((hhh))-->out[out]
+```
+## [Day 12: Christmas Tree Farm](https://adventofcode.com/2025/day/12)<span id="day-12"><span>
+2D bin packing with rotations and reflections _(supposedly...)_
+
+This puzzle presents a 2D packing problem involving fitting a 
+collection of non-overlapping, irregular shapes - `presents` - 
+into a defined rectangular area - `region beneath the tree`. 
+
+Shapes could be rotated and flipped either horizontally or vertically 
+to pack them in the most efficient way and allow them to fit between each other 
+to fulfill the available space. The goal was to determine if given number
+of presents can somehow fit in the described area.
+
+The description of the problem posed it as a very complicated, involved and hard puzzle.
+In reality, puzzle's input was constructed in such a way that there was no
+need for any of the rotations, flips or even interlocking the presents. 
+The region was either bid enough that it would fit all presents placed 
+next to each other, or small enough that no matter what arrangement was 
+to be made, they wouldn't fit.
+
+```
+Presents:
+0   │ 1   │ 2   │ 3   │ 4   │ 5   
+────┼─────┼─────┼─────┼─────┼─────        
+### │ ### │ .## │ ##. │ ### │ ### 
+##. │ ##. │ ### │ ### │ #.. │ .#. 
+##. │ .## │ ##. │ ##. │ ### │ ### 
+
+Specification:
+4x4: 0 0 0 0 2 0
+12x5: 1 0 1 0 2 2
+12x5: 1 0 1 0 3 2
+
+
+4x4: 0 0 0 0 2 0
+Meaning:
+2 shapes from position 4 need to fit in 4x4 space 
+┌────┐
+│###.│
+│#□□□│
+│###□│
+│.□□□│
+└────┘ 
+Such requirement wouldn't show up in the actual input. 
+Size of area would possibly be:
+ - 3x6 - allowing two shapes be placed side by side
+ - 3x4 - no matter the configuration, shapes wouldn't fit 
+         (they require at least 14 spaces, and the area allows for 12)
 ```
