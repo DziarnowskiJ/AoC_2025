@@ -1,3 +1,6 @@
+from itertools import groupby
+
+
 def split_string(text):
     """
     Splits the input string into a list of lists, where each inner list
@@ -42,3 +45,15 @@ def split_string_dict(text):
     :return:
     """
     return {len(split[0]): split for split in split_string(text)}
+
+
+def split_list_string(l: list[str], divider: str = ''):
+    """
+    Splits list of stings by specified string
+
+    Example: ['hello', '', 'world', '!'] --> [['hello], ['world', '!']]
+    :param l: list of stings
+    :param divider: string (default: '')
+    :return:
+    """
+    return [list(group) for k, group in groupby(l, lambda x: x == divider) if not k]
